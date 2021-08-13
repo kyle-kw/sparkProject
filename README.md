@@ -4,7 +4,7 @@
 
 ## 一、什么是Spark
 
-![image-20210808165041517](/image/Spark%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/1.png)
+![image-20210808165041517](spark笔记/image/Spark基本概念/image-20210808165041517.png)
 
 **Apache Spark**是用于大规模数据处理的统一分析引擎。
 
