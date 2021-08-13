@@ -12,7 +12,7 @@ Spark框架的核心是一个计算引擎，它采用了标准的master-slave的
 
 当Spark执行时的基本结构如下：
 
-​	![image-20210809112559010](SparkCore_RDD_Acc_Bc/image-20210809112559010.png)
+​	![image-20210809112559010](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809112559010.png)
 
 图中Driver表示master，复制整个集群中的作业任务调度。Executor表示slave，负责实际执行任务。
 
