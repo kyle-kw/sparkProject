@@ -12,7 +12,7 @@ Spark框架的核心是一个计算引擎，它采用了标准的master-slave的
 
 当Spark执行时的基本结构如下：
 
-​	![image-20210809112559010](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809112559010.png)
+​	![image-20210809112559010](SparkCore_RDD_Acc_Bc/image-20210809112559010.png)
 
 图中Driver表示master，复制整个集群中的作业任务调度。Executor表示slave，负责实际执行任务。
 
@@ -112,7 +112,7 @@ object Driver {
 
 先启动Executor，再运行Driver，就可以看到，Executor端接收到的数据：
 
-​	![image-20210809115035591](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809115035591.png)
+​	![image-20210809115035591](SparkCore_RDD_Acc_Bc/image-20210809115035591.png)
 
 
 
@@ -210,7 +210,7 @@ object Driver {
 
 结果如下：
 
-​	![image-20210809125705159](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809125705159.png)
+​	![image-20210809125705159](SparkCore_RDD_Acc_Bc/image-20210809125705159.png)
 
 
 
@@ -338,7 +338,7 @@ object Deiver {
 
 结果如下：
 
-​	![image-20210809130657528](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809130657528.png)
+​	![image-20210809130657528](SparkCore_RDD_Acc_Bc/image-20210809130657528.png)
 
 
 
@@ -360,7 +360,7 @@ object Deiver {
 
 ​		应用程序相关启动参数如下：
 
-​	![image-20210809141129107](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809141129107.png)
+​	![image-20210809141129107](SparkCore_RDD_Acc_Bc/image-20210809141129107.png)
 
 
 
@@ -372,7 +372,7 @@ object Deiver {
 
 **有向无环图**
 
-​		![image-20210809141301976](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809141301976.png)
+​		![image-20210809141301976](SparkCore_RDD_Acc_Bc/image-20210809141301976.png)
 
 ​		大数据计算引擎框架我们根据使用方式的不同一般会分为四类，其中第一类就是Hadoop 所承载的 MapReduce,它将计算分为两个阶段，分别为 Map 阶段 和 Reduce 阶段。对于上层应用来说，就不得不想方设法去拆分算法，甚至于不得不在上层应用实现多个 Job的串联，以完成一个完整的算法，例如迭代计算。 由于这样的弊端，催生了支持 DAG 框架的产生。因此，支持 DAG  的框架被划分为第二代计算引擎。如 Tez 以及更上层的Oozie。这里我们不去细究各种 DAG 实现之间的区别，不过对于当时的 Tez 和 Oozie 来说，大多还是批处理的任务。接下来就是以 Spark 为代表的第三代的计算引擎。第三代计算引擎的特点主要是 Job 内部的 DAG 支持（不跨越 Job），以及实时计算。
 
@@ -380,11 +380,11 @@ object Deiver {
 
 假设运行A依赖于B，而运行B依赖于C和D，它们之间的关系如下：
 
-​	![image-20210809142517806](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809142517806.png)
+​	![image-20210809142517806](SparkCore_RDD_Acc_Bc/image-20210809142517806.png)
 
 此时可正常运行，又假设运行D依赖于A，它们之间的关系如下：
 
-​	![image-20210809142734666](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809142734666.png)
+​	![image-20210809142734666](SparkCore_RDD_Acc_Bc/image-20210809142734666.png)
 
 此时不能正常运行，因为它们之间形成了一个闭环，A依赖B，B依赖D，D依赖A，永远无法达成条件。
 
@@ -422,11 +422,11 @@ IO流是Input和Output的简称，其中包括**字节流**和**字符流**。
 
 首先创建一个简单的流，直接读取文件并打印出来：
 
-​	![image-20210809143916598](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809143916598.png)
+​	![image-20210809143916598](SparkCore_RDD_Acc_Bc/image-20210809143916598.png)
 
 这里的流，当开始读取时，读取到一个字节，就打印一个字节。感觉一个一个字节打印太乱了，我们就想让它累计到一定字节之后，再打印输出。这时我们就需要加上一个缓冲区：
 
-​	![image-20210809144253500](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809144253500.png)
+​	![image-20210809144253500](SparkCore_RDD_Acc_Bc/image-20210809144253500.png)
 
 
 
@@ -434,7 +434,7 @@ IO流是Input和Output的简称，其中包括**字节流**和**字符流**。
 
 有的字符是由多个字节组成，所以我们希望当读到的字节构成一个字符时，这是就需要将**字节**转化为**字符**。
 
-​	![image-20210809144634078](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809144634078.png)
+​	![image-20210809144634078](SparkCore_RDD_Acc_Bc/image-20210809144634078.png)
 
 
 
@@ -473,7 +473,7 @@ object WordCount {
 
 
 
-​	![image-20210809145426941](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809145426941.png)
+​	![image-20210809145426941](SparkCore_RDD_Acc_Bc/image-20210809145426941.png)
 
 RDD在textFile、flatMap、map、reduceByKey时，只是将RDD一层层的封装起来，没有真的读数据，RDD中不保存数据，保存的是处理数据的逻辑。只有当运行到collect时，才会开始读数据，进行计算输出。
 
@@ -515,7 +515,7 @@ RDD的数据只有在调用collect方法时，才会真正执行业务逻辑操�
 
 ### 2.1.3	RDD 核心属性
 
-​	![image-20210809150820560](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809150820560.png)
+​	![image-20210809150820560](SparkCore_RDD_Acc_Bc/image-20210809150820560.png)
 
 RDD有5个核心属性：
 
@@ -523,7 +523,7 @@ RDD有5个核心属性：
 
 ​		RDD 数据结构中存在分区列表，用于执行任务时并行计算，是实现分布式计算的重要属性。
 
-​	![image-20210809150949955](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809150949955.png)
+​	![image-20210809150949955](SparkCore_RDD_Acc_Bc/image-20210809150949955.png)
 
 
 
@@ -531,7 +531,7 @@ RDD有5个核心属性：
 
 ​		Spark 在计算时，是使用分区函数对每一个分区进行计算。
 
-​	![image-20210809151137963](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809151137963.png)
+​	![image-20210809151137963](SparkCore_RDD_Acc_Bc/image-20210809151137963.png)
 
 
 
@@ -539,7 +539,7 @@ RDD有5个核心属性：
 
 ​		RDD 是计算模型的封装，当需求中需要将多个计算模型进行组合时，就需要将多个 RDD 建立依赖关系。
 
-​	![image-20210809151300656](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809151300656.png)
+​	![image-20210809151300656](SparkCore_RDD_Acc_Bc/image-20210809151300656.png)
 
 
 
@@ -547,7 +547,7 @@ RDD有5个核心属性：
 
 ​		当数据为 KV 类型数据时，可以通过设定分区器自定义数据的分区。
 
-​	![image-20210809151430807](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809151430807.png)
+​	![image-20210809151430807](SparkCore_RDD_Acc_Bc/image-20210809151430807.png)
 
 
 
@@ -555,7 +555,7 @@ RDD有5个核心属性：
 
 ​		计算数据时，可以根据计算节点的状态选择不同的节点位置进行计算。
 
-​	![image-20210809151520065](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809151520065.png)
+​	![image-20210809151520065](SparkCore_RDD_Acc_Bc/image-20210809151520065.png)
 
 
 
@@ -620,7 +620,7 @@ val rdd3: RDD[(String, String)] = sc.wholeTextFiles("data/input/words*.txt")
 
 ​		整个文件读取的格式如下：
 
-​	![image-20210809153246216](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809153246216.png)
+​	![image-20210809153246216](SparkCore_RDD_Acc_Bc/image-20210809153246216.png)
 
 
 
@@ -704,15 +704,15 @@ object Spark03_RDD_Memory_Par {
 
 ​	输出三个文件，数量没错
 
-​	![image-20210809160521464](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809160521464.png)
+​	![image-20210809160521464](SparkCore_RDD_Acc_Bc/image-20210809160521464.png)
 
 查看一下每个文件对应的数据是不是我们计算的那样
 
-​	![image-20210809160658933](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809160658933.png)
+​	![image-20210809160658933](SparkCore_RDD_Acc_Bc/image-20210809160658933.png)
 
-​	![image-20210809160710048](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809160710048.png)
+​	![image-20210809160710048](SparkCore_RDD_Acc_Bc/image-20210809160710048.png)
 
-​	![image-20210809160723725](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809160723725.png)
+​	![image-20210809160723725](SparkCore_RDD_Acc_Bc/image-20210809160723725.png)
 
 和我们计算的结果一样。
 
@@ -750,7 +750,7 @@ object Spark03_RDD_Memory_Par {
 
    假设有一个文件1.txt，它的内容如下：
 
-   ​	![image-20210809173717179](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809173717179.png)
+   ​	![image-20210809173717179](SparkCore_RDD_Acc_Bc/image-20210809173717179.png)
 
    则它的字节数为7（加上回车键），偏移量：
 
@@ -791,15 +791,15 @@ object Spark03_RDD_Memory_Par {
 
 来尝试一下
 
-​	![image-20210809174801119](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809174801119.png)
+​	![image-20210809174801119](SparkCore_RDD_Acc_Bc/image-20210809174801119.png)
 
 文件有三个，分区数量一致，查看各个分区的数据是否一致。
 
-​	![image-20210809174914633](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809174914633.png)
+​	![image-20210809174914633](SparkCore_RDD_Acc_Bc/image-20210809174914633.png)
 
-​	![image-20210809175014563](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809175014563.png)
+​	![image-20210809175014563](SparkCore_RDD_Acc_Bc/image-20210809175014563.png)
 
-​	![image-20210809174951770](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210809174951770.png)
+​	![image-20210809174951770](SparkCore_RDD_Acc_Bc/image-20210809174951770.png)
 
 和我们计算的结果一致。
 
@@ -1081,7 +1081,7 @@ RDD 根据数据处理方式的不同将算子整体上分为 Value 类型、双
   // 从服务器日志数据 apache.log 中获取每个时间段访问量
   ```
 
-  ​	![image-20210810115201450](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210810115201450.png)
+  ​	![image-20210810115201450](SparkCore_RDD_Acc_Bc/image-20210810115201450.png)
 
 
 
@@ -1472,11 +1472,11 @@ object Spark_RDD_Operator_transform {
   
   reduceByKey包含分组和聚合的操作，groupByKey只有分组的操作，不能聚合。当只需要分组的情况下，使用groupByKey。而当需要分组和聚合的操作时，使用reduceByKey。
 
-​	![image-20210810130350759](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210810130350759.png)
+​	![image-20210810130350759](SparkCore_RDD_Acc_Bc/image-20210810130350759.png)
 
 
 
-​	![image-20210810130501999](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210810130501999.png)
+​	![image-20210810130501999](SparkCore_RDD_Acc_Bc/image-20210810130501999.png)
 
 
 
@@ -1541,7 +1541,7 @@ object Spark_RDD_Operator_transform {
 
   ​	详情步骤如下：
 
-  ​	![image-20210810150834202](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210810150834202.png)
+  ​	![image-20210810150834202](SparkCore_RDD_Acc_Bc/image-20210810150834202.png)
 
 
 
@@ -1603,7 +1603,7 @@ object Spark_RDD_Operator_transform {
 
   详情步骤如下：
 
-  ​	![image-20210810173740969](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210810173740969.png)
+  ​	![image-20210810173740969](SparkCore_RDD_Acc_Bc/image-20210810173740969.png)
 
 
 
@@ -1804,7 +1804,7 @@ reduceByKey、foldByKey、aggregateByKey、combineByKey 的区别？
 
 agent.log：时间戳，省份，城市，用户，广告，中间字段使用空格分隔。
 
-​	![image-20210811093100654](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811093100654.png)
+​	![image-20210811093100654](SparkCore_RDD_Acc_Bc/image-20210811093100654.png)
 
 2. 需求描述
 
@@ -1812,7 +1812,7 @@ agent.log：时间戳，省份，城市，用户，广告，中间字段使用�
 
 分析图解：
 
-​	![image-20210811093422079](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811093422079.png)
+​	![image-20210811093422079](SparkCore_RDD_Acc_Bc/image-20210811093422079.png)
 
 ```scala
 package com.local.rdd.operator.transform
@@ -1853,7 +1853,7 @@ object Spark_RDD_Operator_Transform_text {
 }
 ```
 
-​	![image-20210811095123993](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811095123993.png)
+​	![image-20210811095123993](SparkCore_RDD_Acc_Bc/image-20210811095123993.png)
 
 
 
@@ -2136,7 +2136,7 @@ object Spark02_RDD_Operator_Action {
   rdd.foreach(println)
   ```
   
-  ​	![image-20210811130638235](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811130638235.png)
+  ​	![image-20210811130638235](SparkCore_RDD_Acc_Bc/image-20210811130638235.png)
 
 
 
@@ -2215,7 +2215,7 @@ object Spark02_RDD_Operator_Action {
    }
    ```
 
-   ​	![image-20210811130557835](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811130557835.png)
+   ​	![image-20210811130557835](SparkCore_RDD_Acc_Bc/image-20210811130557835.png)
 
 3. Kryo 序列化框架
 
@@ -2268,21 +2268,21 @@ object Spark01_RDD_Serial {
 
 ## 2.5	RDD依赖关系
 
-​	![image-20210811130747705](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811130747705.png)
+​	![image-20210811130747705](SparkCore_RDD_Acc_Bc/image-20210811130747705.png)
 
 ### 2.5.1	RDD血缘关系
 
 ​		RDD 只支持粗粒度转换，即在大量记录上执行的单个操作。将创建 RDD 的一系列 Lineage（血统）记录下来，以便恢复丢失的分区。RDD 的 Lineage 会记录 RDD 的元数据信息和转换行为，当该 RDD 的部分分区数据丢失时，它可以根据这些信息来重新运算和恢复丢失的数据分区。
 
-​	![image-20210811130825112](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811130825112.png)
+​	![image-20210811130825112](SparkCore_RDD_Acc_Bc/image-20210811130825112.png)
 
 相邻的两个RDD的关系称之为依赖关系，多个连续的RDD的依赖关系，称之为**血缘关系**。每个RDD会保存血缘关系。
 
-​	![image-20210811131046266](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811131046266.png)
+​	![image-20210811131046266](SparkCore_RDD_Acc_Bc/image-20210811131046266.png)
 
 
 
-​	![image-20210811131108440](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811131108440.png)
+​	![image-20210811131108440](SparkCore_RDD_Acc_Bc/image-20210811131108440.png)
 
 ```scala
 val lines: RDD[String] = sc.textFile("data/input/text.txt")
@@ -2372,9 +2372,9 @@ List(org.apache.spark.ShuffleDependency@14fded9d)
 class OneToOneDependency[T](rdd: RDD[T]) extends NarrowDependency[T](rdd)
 ```
 
-​	![image-20210811132316316](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811132316316.png)
+​	![image-20210811132316316](SparkCore_RDD_Acc_Bc/image-20210811132316316.png)
 
-​	![image-20210811132559901](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811132559901.png)
+​	![image-20210811132559901](SparkCore_RDD_Acc_Bc/image-20210811132559901.png)
 
 
 
@@ -2395,9 +2395,9 @@ class ShuffleDependency[K: ClassTag, V: ClassTag, C: ClassTag](
  extends Dependency[Product2[K, V]]
 ```
 
-​	![image-20210811132440320](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811132440320.png)
+​	![image-20210811132440320](SparkCore_RDD_Acc_Bc/image-20210811132440320.png)
 
-​	![image-20210811132642629](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811132642629.png)
+​	![image-20210811132642629](SparkCore_RDD_Acc_Bc/image-20210811132642629.png)
 
 
 
@@ -2405,7 +2405,7 @@ class ShuffleDependency[K: ClassTag, V: ClassTag, C: ClassTag](
 
 DAG（Directed Acyclic Graph）有向无环图是由点和线组成的拓扑图形，该图形具有方向，不会闭环。例如，DAG 记录了 RDD 的转换过程和任务的阶段。
 
-​	![image-20210811160558518](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811160558518.png)	![image-20210811160611914](image/SparkCore_RDD_Acc_Bc/image-20210811160611914.png)
+​	![image-20210811160558518](SparkCore_RDD_Acc_Bc/image-20210811160558518.png)	![image-20210811160611914](SparkCore_RDD_Acc_Bc/image-20210811160611914.png)
 
 当算子的转换需要shuffle，就会创建新的阶段。
 
@@ -2488,7 +2488,7 @@ RDD 任务切分中间分为：Application、Job、Stage 和 Task
 
 注意：Application  ->  Job  ->  Stage  ->  Task 每一层都是 1 对 n 的关系。
 
-​	![image-20210811161129272](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210811161129272.png)
+​	![image-20210811161129272](SparkCore_RDD_Acc_Bc/image-20210811161129272.png)
 
 
 
@@ -2543,9 +2543,9 @@ RDD 通过 Cache 或者 Persist 方法将前面的计算结果缓存，默认情
 
 缓存有可能丢失，或者存储于内存的数据由于内存不足而被删除，RDD 的缓存容错机制保证了即使缓存丢失也能保证计算的正确执行。通过基于 RDD 的一系列转换，丢失的数据会被重算，由于 RDD 的各个 Partition 是相对独立的，因此只需要计算丢失的部分即可，并不需要重算全部 Partition。
 
-​	![image-20210812100928437](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210812100928437.png)
+​	![image-20210812100928437](SparkCore_RDD_Acc_Bc/image-20210812100928437.png)
 
-​	![image-20210812100949883](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210812100949883.png)
+​	![image-20210812100949883](SparkCore_RDD_Acc_Bc/image-20210812100949883.png)
 
 Spark 会自动对一些 Shuffle 操作的中间数据做持久化操作(比如：reduceByKey)。这样做的目的是为了当一个节点 Shuffle 失败了避免重新计算整个输入。但是，在实际使用的时候，如果想重用数据，仍然建议调用 persist 或 cache。
 
@@ -2896,11 +2896,11 @@ sum = 0
 
 我们来图解一下：
 
-​	![image-20210812101019587](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210812101019587.png)
+​	![image-20210812101019587](SparkCore_RDD_Acc_Bc/image-20210812101019587.png)
 
 这样就需要累加器，去累加。
 
-​	![image-20210812101138617](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210812101138617.png)
+​	![image-20210812101138617](SparkCore_RDD_Acc_Bc/image-20210812101138617.png)
 
 
 
@@ -3088,7 +3088,7 @@ object Spark05_Bc {
 
 假设有四个任务，每个任务都需要map，这样每个任务都会复制出来一个map出来。
 
-​	![image-20210812112745943](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210812112745943.png)
+​	![image-20210812112745943](SparkCore_RDD_Acc_Bc/image-20210812112745943.png)
 
 闭包数据，都是以Task为单位发送的，每个任务中包含闭包数据。这样可能会导致，一个Executor中含有大量重复的数据，并且占用大量的内存
 
@@ -3096,7 +3096,7 @@ Executor其实就一个JVM，所以在启动时，会自动分配内存。完全
 
 Spark中的广播变量就可以将闭包的数据保存到Executor的内存中，Spark中的广播变量不能够更改 ： 分布式共享只读变量。
 
-​	![image-20210812112932801](spark笔记/image/SparkCore_RDD_Acc_Bc/image-20210812112932801.png)
+​	![image-20210812112932801](SparkCore_RDD_Acc_Bc/image-20210812112932801.png)
 
 
 
